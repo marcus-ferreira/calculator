@@ -7,57 +7,21 @@ let firstOperand = null;
 let secondOperand = null;
 let operator = null;
 
-for (let i = 0; i < buttons.length; i++) {
-	buttons[i].addEventListener('touchstart', () => {
 
-		if (i === 0) {
-			// Clear
-			firstOperand = null;
-			secondOperand = null;
-			operator = null;
-			currentDisplay.innerHTML = 0;
-			previousDisplay.innerHTML = '';
+function erase() {
+	firstOperand = null;
+	secondOperand = null;
+	operator = null;
+	currentDisplay.innerHTML = 0;
+	previousDisplay.innerHTML = '';
+}
 
-		} else if (i === 1) {
-			// Backspace
-			if (currentDisplay.innerHTML.length > 1) {
-				currentDisplay.innerHTML = currentDisplay.innerHTML.slice(0, -1);
-			} else {
-				currentDisplay.innerHTML = 0;
-			}
-
-		} else if (i === 5) {
-			// Divide
-			addOperator('/');
-
-		} else if (i === 9) {
-			// Times
-			addOperator('*');
-
-		} else if (i === 13) {
-			// Minus
-			addOperator('-');
-
-		} else if (i === 17) {
-			// Plus
-			addOperator('+');
-
-		} else if (i === 14) {
-			// Comma
-			if (currentDisplay.innerHTML.indexOf(',') === -1) {
-				currentDisplay.innerHTML += ',';
-			}
-
-		} else if (i === 16) {
-			// Equals
-			equals();
-
-		} else if (buttons[i].innerHTML >= 0 && buttons[i].innerHTML <= 9) {
-			// Numbers
-			addNumber(buttons[i].innerHTML);
-		}
-
-	});
+function backspace() {
+	if (currentDisplay.innerHTML.length > 1) {
+		currentDisplay.innerHTML = currentDisplay.innerHTML.slice(0, -1);
+	} else {
+		currentDisplay.innerHTML = 0;
+	}
 }
 
 function addNumber(number) {
@@ -74,6 +38,12 @@ function addOperator(op) {
 		operator = op;
 		previousDisplay.innerHTML = `${firstOperand} ${operator}`;
 		currentDisplay.innerHTML = 0;
+	}
+}
+
+function addComma() {
+	if (currentDisplay.innerHTML.indexOf(',') === -1) {
+		currentDisplay.innerHTML += ',';
 	}
 }
 
